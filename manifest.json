@@ -1,0 +1,17 @@
+{
+  "id": "paperoni.reading-tracker",
+  "name": "Reading Tracker",
+  "version": "0.3.0",
+  "apiVersion": "1.x",
+  "capabilities": [
+    "ui.activity.register",
+    "ui.activity.view.register",
+    "ui.activity.sidebar.register",
+    "ui.topbar.extensionReservedArea.register",
+    "paperoni.papers.read",
+    "paperoni.ui.control",
+    "paperoni.events.subscribe",
+    "data.read",
+    "data.write"
+  ]
+}

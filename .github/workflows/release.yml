@@ -1,0 +1,59 @@
+name: Release Extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build production bundle
+        run: npm run build
+
+      - name: Verify manifest version matches tag
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          node -e "
+            const fs = require('fs');
+            const tag = process.env.TAG_NAME.replace(/^v/, '');
+            const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+            if (manifest.version !== tag) {
+              console.error(`manifest.json version ${manifest.version} does not match tag ${tag}`);
+              process.exit(1);
+            }
+          "
+
+      - name: Generate SHA-256 checksums
+        run: |
+          sha256sum manifest.json > manifest.sha256
+          sha256sum main.js > main.sha256
+
+      - name: Create GitHub release and upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            manifest.json
+            main.js
+            manifest.sha256
+            main.sha256
