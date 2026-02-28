@@ -1,3 +1,20 @@
+## Verifying Release Assets
+
+After downloading `manifest.json`, `main.js`, and `checksums.txt` from a GitHub release, you can verify their integrity:
+
+On macOS (with coreutils):
+
+```bash
+gsha256sum -c checksums.txt
+```
+
+Or with BSD shasum (default on macOS, slightly different output):
+
+```bash
+shasum -a 256 -c checksums.txt
+```
+
+All files should report `OK` if they match the published checksums.
 # Reading Tracker Extension (`paperoni.reading-tracker`)
 
 ## Overview
@@ -96,8 +113,7 @@ Releases are built from source by GitHub Actions and uploaded as release assets.
 Published assets per release:
 - `manifest.json`
 - `main.js`
-- `manifest.sha256`
-- `main.sha256`
+- `checksums.txt`
 
 Recommended release steps:
 1. Bump version in `manifest.json` and `package.json`.

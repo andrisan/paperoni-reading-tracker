@@ -42,10 +42,9 @@ jobs:
             }
           "
 
-      - name: Generate SHA-256 checksums
+      - name: Generate checksums file
         run: |
-          sha256sum manifest.json > manifest.sha256
-          sha256sum main.js > main.sha256
+          sha256sum manifest.json main.js > checksums.txt
 
       - name: Create GitHub release and upload assets
         uses: softprops/action-gh-release@v2
@@ -55,5 +54,4 @@ jobs:
           files: |
             manifest.json
             main.js
-            manifest.sha256
-            main.sha256
+            checksums.txt
