@@ -15,7 +15,7 @@ shasum -a 256 -c checksums.txt
 ```
 
 All files should report `OK` if they match the published checksums.
-# Reading Tracker Extension (`paperoni.reading-tracker`)
+# Reading Tracker Extension (`paperoni-reading-tracker`)
 
 ## Overview
 Reading Tracker adds a dedicated activity to Paperoni for managing reading progress with board/list workflows and quick actions.
@@ -96,7 +96,7 @@ Paperoni discovers installed extensions from:
 For Reading Tracker:
 
 ```text
-~/Library/Application Support/paperoni/extensions/paperoni.reading-tracker
+~/Library/Application Support/paperoni/extensions/paperoni-reading-tracker
 ```
 
 Workflow:
@@ -132,7 +132,7 @@ git push origin v0.3.0
 
 ```json
 {
-  "id": "paperoni.reading-tracker",
+  "id": "paperoni-reading-tracker",
   "name": "Reading Tracker",
   "version": "0.3.0",
   "description": "Track reading progress inside Paperoni.",
@@ -172,7 +172,7 @@ git push origin v0.3.0
 
 ## Troubleshooting
 - Extension not listed in Installed:
-  - verify folder name is exactly `paperoni.reading-tracker`
+  - verify folder name is exactly `paperoni-reading-tracker`
   - verify both `manifest.json` and `main.js` exist
 - Extension listed but blank UI:
   - rebuild (`npm run build`)
